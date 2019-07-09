@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .contenter {
+            width: 800px;
+            height: 600px;
+            border: 1px solid #000;
+        }
+        .content {
+            overflow: hidden;
+        }
+        header{
+            height: 100px;
+            background: rgb(226, 5, 5);
+        }
+        .content .aside {
+            float: left;
+            width: 200px;
+            height: 400px;
+            background: rgb(115, 197, 7);
+        }
+        .content .main {
+            float: left;
+            width: 400px;
+            height: 400px;
+            background: gold;
+        }
+        .content .article {
+            float: left;
+            width: 200px;
+            height: 400px;
+            background: blue;
+        }
+        .footer {
+            width: 800px;
+            height: 100px;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <layout>
+            <template slot="header">
+                <h1>我的网站</h1>
+            </template>
+            <template slot="aside">
+                <h2>我的侧边栏</h2>
+            </template>
+            <template slot="main">
+                <h2>我的主题内容</h2>
+            </template>
+            <template slot="article">
+                <h2>我的文章</h2>
+            </template>
+            <template slot="footer"> 
+                <h2>我的页脚</h2>
+            </template>
+        </layout>
+    </div>
+</body>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./03插槽.js"></script>
+<script>
+
+
+    var vm = new Vue({
+        components: {
+            "layout": layout
+        },
+        el:"#app",
+        data: {}
+    })
+</script>
+</html>

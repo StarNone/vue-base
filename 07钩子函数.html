@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- {{msg}} -->
+        <com-a v-if="isShow"></com-a>
+        <button @click="isShow=!isShow">taggle</button>
+    </div>
+</body>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    var comA = {
+        template:`
+            <h1 id="title">{{msg}}</h1>
+        `,
+        data () {
+            return {
+                msg:"我是标题"
+            }
+        },
+        beforeCreate () {
+            console.log(this.msg,"beforeCreate 实例化之前")
+        },
+        created () {
+            console.log(this.msg,"created")
+        },
+        beforeMount () {
+            console.log(document.querySelector("#tite"),"beforeMount")
+            console.log(this.msg,"beforeMount")
+        },
+        mounted () {
+            console.log(this.msg,document.querySelector("#title"),"mounted")
+            window._resize = function () {
+                console.log(document.body.clientWidth||document.documentElement.clientWidth)
+            }
+            window.addEventListener("resize", window._resize)
+        },
+        beforeDestroy () {
+            window.removeEventListener("resize",window._resize)
+        },
+        destroyed () {
+            console.log("组件被移除了")
+        }
+    }
+    new Vue({
+        components: {
+            "com-a":comA
+        },
+        el:"#app",
+        data:{
+            msg: "<h1>我是字符串</h1>",
+            isShow:true
+        }
+    })
+</script>
+</html>

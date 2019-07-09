@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+</body>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    var page1 = {
+        template: `
+            <div>
+                <h1>我是第一页</h1>
+                <router-link to="/page2">去第二页</router-link>
+            </div>
+        `
+    }
+
+    var page2 = {
+        template:`
+            <div>
+                <h2>我是第二页</h2>
+                <router-link to="/">去第一页</router-link>
+            </div>
+        `
+    }
+
+    var router = new VueRouter({
+        routes: [
+            {
+                path:"/",
+                component: page1
+            },
+            {
+                path:"/page2",
+                component: page2
+            }
+        ]
+    })
+
+    var vm = new Vue({
+        router,
+        el: "#app",
+        components: {
+            "page1": page1,
+            "page2": page2
+        },
+    })
+</script>
+</html>

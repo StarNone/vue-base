@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+        }
+        .width{
+            width: 200px;
+        }
+        .btn {
+            height: 40px;
+            line-height: 40px;
+            border-radius: 4px;
+            border: 1px solid #ff0;
+            background: rgba(57, 141, 250, 0.753);
+        }
+        .active {
+            background: #f00;
+        }
+        .primary{
+            background: #00f;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <el-button @click="addClass">默认按钮</el-button>
+        <el-button type="primary" @click="isWidth=!isWidth">好看的按钮</el-button>
+        <el-button type="primary" size="small">按钮</el-button>
+        <div class="box" v-bind:class="{active:isActive,width:isWidth}"></div>
+        <dy-button>默认按钮</dy-button>
+        <dy-button type = "primary">蓝色的按钮</dy-button>
+    </div>
+</body>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/element-ui/lib/index.js"></script>
+<script>
+    var dybutton = {
+        props: {
+            type:String
+        },
+        template:`<button class='btn' :class='{primary:this.type=="primary"}'><slot></slot></button>`,
+        created () {
+            console.log(this.type,"父组件传进来的值")
+        }
+    }
+
+    var vm = new Vue({
+        components: {
+          "dy-button": dybutton  
+        },
+        el: "#app",
+        data: {
+            isActive:false,
+            isWidth:false
+        },
+        methods: {
+            addClass(){
+                this.isActive = !this.isActive;
+            }
+        }
+    })
+</script>
+</html>

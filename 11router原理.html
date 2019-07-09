@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+</body>
+<script>
+    var page1 = {
+        template: `
+            <div>
+                <h1>我是第一页</h1>
+                <a href="#page2">跳转到第二页</a>
+            </div>
+        `
+    }
+
+    var page2 = {
+        template: `
+            <div>
+                <h1>我是第二页</h1>
+                <a href="#">跳转到第一页</a>
+            </div>
+        `
+    }
+
+    var app = document.querySelector("#app");
+    app.innerHTML = page1.template
+
+    window.onhashchange = function () {
+        console.log(location.hash)
+        var hash = location.hash;
+        if (hash == "#page2") {
+            app.innerHTML = page2.template;
+        } else if (hash == "") {
+            app.innerHTML = page1.template;
+        }
+    }
+
+    history.pushState ({
+        some: "一段文字"
+    },"/index","index.html")
+    app.innerHTML = page2.template;
+</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box1{
+            width: 100px;
+            height: 100px;
+            background: #f00;
+        }
+        .box2{
+            width: 100px;
+            height: 100px;
+            background: #ff0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <component v-bind:is="some"></component>
+        <button @click="toggleComponent">切换组件</button>
+    </div>
+</body>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    var comA = {
+        template:`
+            <div class="box1">我是组件A</div>
+        `
+    }
+    var comB = {
+        template:`
+            <div class="box2">我是组件B</div>
+        `
+    }
+    new Vue({
+        components: {
+            "com-a":comA,
+            "com-b":comB
+        },
+        el:"#app",
+        data:{
+            some:"com-a"
+        },
+        methods: {
+            toggleComponent(){
+                this.some = this.some == "com-a"?"com-b":"com-a";
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .parent {
+            width: 300px;
+            height: 300px;
+            background: #f00;
+        }
+        .child {
+            width: 100px;
+            height: 100px;
+            background: #ff0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <com-a @click.native="handleClick"></com-a>
+        <a href="http://www.baidu.com" @click.prevent="click">百度一下，你就知道</a>
+        <div class="parent" @click="clickParent">
+            <div class="child" @click.stop="clickChild">
+
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    var comA = {
+        template:`
+            <div class="container">
+                <h1 id="title">{{msg}}</h1>
+            </div>
+        `,
+        data () {
+            return {
+                msg: "我是标题",
+            }
+        }
+    }
+
+    new Vue({
+        components: {
+            "com-a":comA,
+        },
+        el: "#app",
+        data: {
+
+        },
+        methods: {
+            handleClick () {
+                console.log("事件触发了")
+            },
+            click () {
+                console.log("跳转被阻止了")
+            },
+            clickParent () {
+                console.log("parent被点击了")
+            },
+            clickChild ($event) {
+                // $event.stopPropagation() 阻止事件冒泡
+                console.log("child被点击了")
+            }
+        }
+    })
+</script>
+</html>
